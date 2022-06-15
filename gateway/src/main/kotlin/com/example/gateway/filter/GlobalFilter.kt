@@ -11,24 +11,32 @@ import reactor.core.publisher.Mono.fromRunnable
 
 
 @Component
-class CustomFilter : AbstractGatewayFilterFactory<CustomFilter.Config>(Config::class.java) {
+class GlobalFilter : AbstractGatewayFilterFactory<GlobalFilter.Config>(Config::class.java) {
 
-    class Config
+    class Config(
+         val baseMessage: String,
+         val preLogger: Boolean,
+         val postLogger: Boolean
+    )
     override fun apply(config: Config): GatewayFilter {
         return GatewayFilter { exchange: ServerWebExchange, chain: GatewayFilterChain ->
             val request = exchange.request
             val response = exchange.response
-            //pre filter
-            log.info("Custom PRE filter : request id -> {}", request.id)
-            chain.filter(exchange).then(fromRunnable {
+            log.info("Global filter  baseMessage: {}", config.baseMessage)
 
-            //post filter
-            log.info("Custom POST filter: response code ->{}", response.statusCode)
+            if(config.preLogger){
+                log.info("Logging Filter pre: request id -> {}", request.id)
+            }
+
+            chain.filter(exchange).then(fromRunnable {
+            if(config.postLogger){
+                log.info("Logging Filter post: response code -> {}", response.statusCode)
+            }
             })
         }
     }
 
     companion object {
-        val log: Logger = LoggerFactory.getLogger(CustomFilter::class.java)
+        val log: Logger = LoggerFactory.getLogger(GlobalFilter::class.java)
     }
 }
