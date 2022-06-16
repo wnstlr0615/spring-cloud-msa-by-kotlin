@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 class SecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         http.csrf().disable()
-        http.authorizeHttpRequests().antMatchers("/users/**").permitAll()
+        http.authorizeHttpRequests().antMatchers("/user-service/users/**").permitAll()
         http.headers().frameOptions().disable()
     }
 

@@ -10,18 +10,19 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user-service")
 class UsersController(
     val env: Environment,
     val userService: UserService
 ) {
 
     @GetMapping("/health_check")
-    fun status(): String {
-        return "It`s Working in User Service"
+    fun status(request: HttpServletRequest): String {
+        return "It`s Working in User Service on Port ${request.serverPort}"
     }
 
     @GetMapping("/welcome")
