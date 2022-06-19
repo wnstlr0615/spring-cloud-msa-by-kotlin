@@ -4,6 +4,7 @@ import com.example.orderservice.dto.OrderRequest
 import com.example.orderservice.dto.OrderResponse
 
 interface OrderService {
-    fun AddOrder(userId: String, request: OrderRequest): OrderResponse
+    fun addOrder(userId: String, request: OrderRequest): OrderResponse
+    fun findOrderByUserId(userId: String): List<OrderResponse>
 
 }

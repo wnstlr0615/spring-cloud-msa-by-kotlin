@@ -14,7 +14,7 @@ class OrderServiceImpl(
     val orderRepository: OrderRepository
 ) : OrderService {
     @Transactional
-    override fun AddOrder(userId: String, request: OrderRequest): OrderResponse {
+    override fun addOrder(userId: String, request: OrderRequest): OrderResponse {
         val orderEntity = orderRepository.save(
             request.let {
                 OrderEntity(
@@ -28,5 +28,10 @@ class OrderServiceImpl(
             }
         )
         return OrderResponse(orderEntity)
+    }
+
+    override fun findOrderByUserId(userId: String): List<OrderResponse> {
+        val orderEntity = orderRepository.findAllByUserId(userId)
+        return orderEntity.map(::OrderResponse)
     }
 }
