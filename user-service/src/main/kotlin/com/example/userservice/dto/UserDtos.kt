@@ -28,7 +28,8 @@ data class RegisterUserRequest(
 data class UserResponse(
     val email: String,
     val name: String,
-    val userId: String
+    val userId: String,
+    val orders: List<OrderResponse> = mutableListOf()
 ) {
     constructor(user: UserEntity) : this(
         user.email,

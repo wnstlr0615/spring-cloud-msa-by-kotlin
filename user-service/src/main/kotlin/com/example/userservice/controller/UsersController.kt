@@ -6,6 +6,7 @@ import com.example.userservice.service.UserService
 import org.springframework.core.env.Environment
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -34,5 +35,17 @@ class UsersController(
     fun userAdd(@RequestBody @Valid request: RegisterUserRequest): ResponseEntity<UserResponse> {
         val userResponse = userService.addUser(request)
         return ResponseEntity.ok(userResponse)
+    }
+    @GetMapping("/users")
+    fun findAllUser(): ResponseEntity<List<UserResponse>> {
+        val users = userService.findAllUser()
+        return ResponseEntity.ok(users)
+    }
+    @GetMapping("/users/{userId}")
+    fun findByUserId(
+        @PathVariable userId: String
+    ): ResponseEntity<UserResponse> {
+        val users = userService.findByUserId(userId)
+        return ResponseEntity.ok(users)
     }
 }

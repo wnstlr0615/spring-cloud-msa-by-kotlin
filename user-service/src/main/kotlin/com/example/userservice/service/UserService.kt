@@ -5,4 +5,6 @@ import com.example.userservice.dto.UserResponse
 
 interface UserService {
     fun addUser(request: RegisterUserRequest): UserResponse
+    fun findAllUser(): List<UserResponse>
+    fun findByUserId(userId: String): UserResponse
 }
