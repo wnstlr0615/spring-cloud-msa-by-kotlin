@@ -14,13 +14,13 @@ class UserServiceImpl(
     val userRepository: UserRepository,
     val encoder: PasswordEncoder
 ) : UserService {
+    @Transactional
     override fun addUser(request: RegisterUserRequest): UserResponse {
         val userEntity = request.toEntity().apply { this.password = encoder.encode(password) }
         val saveEntity = userRepository.save(userEntity)
         return UserResponse(saveEntity)
     }
 
-    @Transactional
     override fun findAllUser(): List<UserResponse> {
         return userRepository.findAll().map(::UserResponse)
     }
