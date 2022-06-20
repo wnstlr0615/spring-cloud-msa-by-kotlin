@@ -34,6 +34,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.h2database:h2:2.1.212")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+    implementation("com.auth0:java-jwt:3.19.2")
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

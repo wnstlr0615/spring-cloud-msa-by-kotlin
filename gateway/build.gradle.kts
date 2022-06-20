@@ -25,6 +25,8 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
+    implementation("com.auth0:java-jwt:3.19.2")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

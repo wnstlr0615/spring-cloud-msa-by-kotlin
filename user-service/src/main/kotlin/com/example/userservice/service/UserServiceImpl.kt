@@ -1,8 +1,10 @@
 package com.example.userservice.service
 
+import com.example.userservice.config.CustomUser
 import com.example.userservice.dto.RegisterUserRequest
 import com.example.userservice.dto.UserResponse
 import com.example.userservice.repository.UserRepository
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -29,4 +31,5 @@ class UserServiceImpl(
         val userEntity = userRepository.findByUserId(userId) ?: throw UsernameNotFoundException("사용자를 찾을 수 없습니다.")
         return UserResponse(userEntity)
     }
+
 }

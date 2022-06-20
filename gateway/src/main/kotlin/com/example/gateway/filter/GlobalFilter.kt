@@ -9,14 +9,13 @@ import org.springframework.stereotype.Component
 import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Mono.fromRunnable
 
-
 @Component
 class GlobalFilter : AbstractGatewayFilterFactory<GlobalFilter.Config>(Config::class.java) {
 
     class Config(
-         val baseMessage: String,
-         val preLogger: Boolean,
-         val postLogger: Boolean
+        val baseMessage: String,
+        val preLogger: Boolean,
+        val postLogger: Boolean
     )
     override fun apply(config: Config): GatewayFilter {
         return GatewayFilter { exchange: ServerWebExchange, chain: GatewayFilterChain ->
@@ -24,15 +23,17 @@ class GlobalFilter : AbstractGatewayFilterFactory<GlobalFilter.Config>(Config::c
             val response = exchange.response
             log.info("Global filter  baseMessage: {}", config.baseMessage)
 
-            if(config.preLogger){
+            if (config.preLogger) {
                 log.info("Logging Filter pre: request id -> {}", request.id)
             }
 
-            chain.filter(exchange).then(fromRunnable {
-            if(config.postLogger){
-                log.info("Logging Filter post: response code -> {}", response.statusCode)
-            }
-            })
+            chain.filter(exchange).then(
+                fromRunnable {
+                    if (config.postLogger) {
+                        log.info("Logging Filter post: response code -> {}", response.statusCode)
+                    }
+                }
+            )
         }
     }
 

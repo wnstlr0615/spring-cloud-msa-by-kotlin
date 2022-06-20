@@ -3,6 +3,7 @@ package com.example.userservice.dto
 import com.example.userservice.entity.UserEntity
 import java.util.*
 import javax.validation.constraints.Email
+import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
@@ -37,3 +38,15 @@ data class UserResponse(
         user.userId
     )
 }
+
+data class LoginRequest(
+    @field:NotBlank(message = "email cannot be null")
+    @field:Size(min = 2, message = "Email not be less than two characters")
+    @field:Email
+    val email: String?,
+    @field:NotBlank(message = "pass word cannot be null")
+    @field:Size(min = 8, message = "password must be equal or grater than 8 characters less then 16 characters")
+    val password: String?
+)
+
+

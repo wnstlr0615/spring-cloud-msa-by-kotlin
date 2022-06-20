@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component
 import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Mono.fromRunnable
 
-
 @Component
 class CustomFilter : AbstractGatewayFilterFactory<CustomFilter.Config>(Config::class.java) {
 
@@ -18,13 +17,14 @@ class CustomFilter : AbstractGatewayFilterFactory<CustomFilter.Config>(Config::c
         return GatewayFilter { exchange: ServerWebExchange, chain: GatewayFilterChain ->
             val request = exchange.request
             val response = exchange.response
-            //pre filter
+            // pre filter
             log.info("Custom PRE filter : request id -> {}", request.id)
-            chain.filter(exchange).then(fromRunnable {
-
-            //post filter
-            log.info("Custom POST filter: response code ->{}", response.statusCode)
-            })
+            chain.filter(exchange).then(
+                fromRunnable {
+                    // post filter
+                    log.info("Custom POST filter: response code ->{}", response.statusCode)
+                }
+            )
         }
     }
 
