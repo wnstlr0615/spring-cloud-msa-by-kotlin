@@ -18,10 +18,16 @@ class UsersController(
     val env: Environment,
     val userService: UserService
 ) {
-
     @GetMapping("/health_check")
     fun status(request: HttpServletRequest): String {
-        return "It`s Working in User Service on Port ${request.serverPort}"
+        return """
+            It`s Working in User Service on Port ${request.serverPort}, 
+            port(local.server.port) = ${env.getProperty("local.server.port")}, 
+            port(server.port) = ${env.getProperty("server.port")}, 
+            with token secret = ${env.getProperty("token.secret")}, 
+            with token time = ${env.getProperty("token.expiration_time")}
+        """
+
     }
 
     @GetMapping("/welcome")
