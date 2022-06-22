@@ -28,3 +28,12 @@ data class OrderResponse(
         order.orderId
     )
 }
+
+data class OrderDto(
+    val productId: String,
+    val userId: String,
+    val orderId: String,
+    val qty: Int,
+    val unitPrice: Int,
+    val totalPrice: Int
+)
