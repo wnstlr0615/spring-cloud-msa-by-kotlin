@@ -15,7 +15,7 @@ spring:
     generate-ddl: true
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/msa
+    url: jdbc:h2:mem:msa
     username: sa
 
 eureka:
