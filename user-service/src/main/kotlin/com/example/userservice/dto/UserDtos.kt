@@ -30,7 +30,7 @@ data class UserResponse(
     val email: String,
     val name: String,
     val userId: String,
-    val orders: List<OrderResponse> = mutableListOf()
+    val orders: MutableList<OrderResponse> = mutableListOf()
 ) {
     constructor(user: UserEntity) : this(
         user.email,

@@ -37,6 +37,7 @@ dependencies {
     implementation("com.auth0:java-jwt:3.19.2")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
     implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.cloud:spring-cloud-starter-bus-amqp")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
