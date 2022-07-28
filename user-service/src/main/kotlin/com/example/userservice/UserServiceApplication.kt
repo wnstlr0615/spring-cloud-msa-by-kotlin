@@ -1,6 +1,5 @@
 package com.example.userservice
 
-import com.example.userservice.error.FeignErrorDecoder
 import feign.Logger
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -19,5 +18,5 @@ fun main(args: Array<String>) {
 
 @Bean
 fun feignLoggerLevel() = Logger.Level.FULL
-@Bean
-fun getFeignErrorDecoder() = FeignErrorDecoder()
+//@Bean
+//fun getFeignErrorDecoder() = FeignErrorDecoder()
